@@ -8,9 +8,12 @@
     "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
+    "module": "NodeNext", // Best for modern Node.js apps
+    "moduleResolution": "NodeNext", //Matches the Module above
+    "target": "es2023",
+    "esModuleInterop": true, // Essential for 'pg' and other libraries
     "types": [],
+    "forceConsistentCasingInFileNames": true,
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -34,12 +37,12 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     // Recommended Options
-    "strict": true,
+    "strict": true, // High quality code i guess
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    "skipLibCheck": true, // Speeds up builds
   }
 }
