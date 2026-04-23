@@ -9,6 +9,7 @@ describe("RegisterUser Service", ()=>{
 
     let mockCtx: MockAuthContext;
     let ctx: AuthContext;
+    const date = new Date();
 
     beforeEach(()=> {
         mockCtx = createMockContext();
@@ -24,7 +25,7 @@ describe("RegisterUser Service", ()=>{
         mockCtx.sign.mockReturnValue("fake_token" as any)
 
         
-        const mockUser = { id: "user_123", ...mockData, password: "hashed_password" };
+        const mockUser = { id: "user_123", ...mockData, password: "hashed_password", createdAt: date,updatedAt: date};
         mockCtx.db.user.create.mockResolvedValue(mockUser);
 
 

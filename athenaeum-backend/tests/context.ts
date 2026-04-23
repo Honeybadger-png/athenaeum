@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension"
+import { PrismaClient } from "@prisma/client"
 import { mockDeep, type DeepMockProxy } from "jest-mock-extended"
 import type { AuthContext } from "../src/services/auth.service.js";
 import { jest } from "@jest/globals";
