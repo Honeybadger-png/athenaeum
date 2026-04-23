@@ -3,7 +3,12 @@ import type { LoginDto,RegisterDto } from "../interfaces/auth.interface.js";
 import * as authService from "../services/auth.service.js"
 
 
-import { ValidatinAuthgData } from "../utils/validation.js";
+import { ValidatinAuthData } from "../utils/validation.js";
+import { prisma } from "../lib/prisma.js";
+import { hashPassword } from "../lib/hasher.js";
+import { generateToken } from "../lib/token.js";
+
+const authCtx = { db:prisma, hash:hashPassword, sign: generateToken}
 
 
 export const login = async(req:Request<{},{},LoginDto>,res:Response,next: NextFunction) => {
@@ -13,13 +18,13 @@ export const login = async(req:Request<{},{},LoginDto>,res:Response,next: NextFu
 
 export const register = async(req:Request<{},{},RegisterDto>,res:Response,next: NextFunction) => {
     const userData = req.body
-    const validation = ValidatinAuthgData(userData.email,userData.password);
+    const validation = ValidatinAuthData(userData.email,userData.password);
     if(!validation.isValid){
         return res.status(400).json({msg:"Validation Failder",errors:validation.errors})
     }
 
     try {
-        const result = await authService.RegisterUser(userData)
+        const result = await authService.RegisterUser(authCtx,userData)
 
         res.cookie('token',result.token,{
             httpOnly: true,

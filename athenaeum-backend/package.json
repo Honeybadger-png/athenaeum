@@ -6,7 +6,10 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",
@@ -21,15 +24,27 @@
     "pg": "^8.20.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@jest/globals": "^30.3.0",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
     "@types/pg": "^8.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "eslint": "^10.2.0",
+    "eslint-plugin-check-file": "^3.3.1",
+    "globals": "^17.5.0",
+    "jest": "^30.3.0",
+    "jest-mock-extended": "^4.0.1",
     "nodemon": "^3.1.14",
     "prisma": "^7.6.0",
+    "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.2"
   }
 }

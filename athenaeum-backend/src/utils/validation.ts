@@ -1,6 +1,6 @@
 
 
-export const ValidatinAuthgData = (email:string,password:string) => {
+export const ValidatinAuthData = (email:string,password:string) => {
     const errors:string[] = []
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
