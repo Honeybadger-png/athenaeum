@@ -1,3 +1,4 @@
+import { ValidationError } from "../../src/core/errors/base-error.js";
 import { RegisterUser, type AuthContext } from "../../src/services/auth.service.js";
 import { createMockContext, type MockAuthContext } from "../context.js";
 
@@ -16,7 +17,7 @@ describe("RegisterUser Service", ()=>{
         ctx = mockCtx as unknown as AuthContext
     })
 
-    const mockData = {email: "test@example.com", password: "password123",name:"Mert"}
+    const mockData = {email: "test@example.com", password: "Password123*",name:"Mert"}
 
     it("should register a new user and return a token", async() => {
 
@@ -31,13 +32,19 @@ describe("RegisterUser Service", ()=>{
 
         // mockedJwt.sign.mockReturnValue("fake_token" as any);
 
-        const result = await RegisterUser(ctx,{email:"test@example.com",password:"password123",name:"Mert"});
+        const result = await RegisterUser(ctx,{email:"test123@example.com",password:"Password123*",name:"Mert"});
 
         expect(result.user).not.toHaveProperty("password");
         expect(result.user.email).toBe(mockData.email);
         expect(result.token).toBe("fake_token");
 
         expect(mockCtx.db.user.create).toHaveBeenCalled();
+    })
+
+    it("should throw validation error", async() => {
+        const register =  RegisterUser(ctx,{email:"testexample.com",password:"123456",name:"Mert"})
+
+        await expect(register).rejects.toThrow(ValidationError);
     })
 
     it("should throw an error if user already exists", async () => {
