@@ -3,7 +3,7 @@
 export const ValidatinAuthData = (email:string,password:string) => {
     const errors:string[] = []
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/
 
